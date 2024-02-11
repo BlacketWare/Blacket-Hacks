@@ -21,7 +21,7 @@
     let unlocked = false;
 
     function buy() {
-        blacket.requests.post('/worker2/open', {
+        blacket.requests.post('/worker3/open', {
             pack
         }, (data) => {
             if (data.error) return console.log(`Error opening`, data);
