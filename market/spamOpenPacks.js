@@ -17,7 +17,7 @@
     let i = 0;
 
     async function buy(a) {
-        await blacket.requests.post('/worker2/open', {
+        await blacket.requests.post('/worker3/open', {
             pack: a
         }, (data) => {
             if (data.error) return console.log(`Error opening`, data);
