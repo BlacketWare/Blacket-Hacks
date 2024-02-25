@@ -1,5 +1,5 @@
 (async () => {
-    if (location.pathname !== '/blooks') return alert('You must be on the Blooks page to run this script.');
+    if (!location.pathname.startsWith('/blooks')) return alert('You must be on the Blooks page to run this script.');
 
     blacket.startLoading();
     $('.styles__blooksHolder___3qZR1-camelCase').children().replaceWith();
