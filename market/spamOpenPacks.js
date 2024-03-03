@@ -1,6 +1,10 @@
 (async () => {
     if (!blacket.packs) return alert('You must be logged in (and on the Market) to run this script.');
 
+    let res = await fetch('/lib/js/market.js');
+    res = await res.text();
+    let endpoint = res.match(/requests.post\("(.*?)",/)[1];
+
     let pack = prompt('Which pack would you like to open?\n\nList:\n' + Object.keys(blacket.packs).join(', '));
     if (!blacket.packs[pack]) return alert('I couldn\'t find that pack...');
 
@@ -17,7 +21,7 @@
     let i = 0;
 
     async function buy(a) {
-        await blacket.requests.post('/worker3/open', {
+        await blacket.requests.post(endpoint, {
             pack: a
         }, (data) => {
             if (data.error) return console.log(`Error opening`, data);
