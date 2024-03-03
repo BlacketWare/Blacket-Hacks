@@ -1,8 +1,12 @@
 (async () => {
+    let res = await fetch('/lib/js/game.js');
+    res = await res.text();
+    let endpoint = res.match(/requests.get\("(.*?)",/)[1];
+    
     let msg = prompt('Enter a message...');
     let name = prompt('Enter a username...');
     
-    blacket.requests.get(`/worker2/user/${name}`, (t) => {
+    blacket.requests.get(`${endpoint}/${name}`, (t) => {
         if (t.error) return alert(`That's not a valid user`);
         blacket.appendChat({
             error: false,
