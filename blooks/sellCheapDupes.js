@@ -1,4 +1,8 @@
 (async () => {
+    let res = await fetch('/lib/js/blooks.js');
+    res = await res.text();
+    let endpoint = res.match(/requests.post\("(.*?)",/)[1];
+    
     if (!blacket.blooks) return alert(`You must be on the Market or Blooks pages to run this script.`);
     if (!confirm('Do you actually want to sell all of your cheap duplicate blooks?')) return alert(`Cancelled script.`);
     let sellLeg = confirm(`Sell Legendaries?\nClick OK to sell Legendaries.\nClick CANCEL to skip Legendaries.`)
@@ -16,7 +20,7 @@
 
     let sellInterval = setInterval(() => {
         if (Object.keys(pendingSale).length == 0) return clearInterval(sellInterval);
-        blacket.requests.post('/worker2/sell', {
+        blacket.requests.post(endpoint, {
             blook: Object.keys(pendingSale)[0],
             quantity: Object.values(pendingSale)[0]
         }, (res) => {
