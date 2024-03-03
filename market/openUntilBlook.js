@@ -1,6 +1,10 @@
 (async () => {
     if (!blacket.packs) return alert('You must be logged in (and on the Market) to run this script.');
 
+    let res = await fetch('/lib/js/market.js');
+    res = await res.text();
+    let endpoint = res.match(/requests.post\("(.*?)",/)[1];
+
     let getPack = {};
     Object.keys(blacket.packs).forEach(a => blacket.packs[a].blooks.forEach(b => getPack[b] = a));
     let target = prompt('Enter a Blook to target:');
@@ -21,7 +25,7 @@
     let unlocked = false;
 
     function buy() {
-        blacket.requests.post('/worker3/open', {
+        blacket.requests.post(endpoint, {
             pack
         }, (data) => {
             if (data.error) return console.log(`Error opening`, data);
