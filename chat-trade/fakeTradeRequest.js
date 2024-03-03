@@ -1,7 +1,11 @@
 (async () => {
+    let res = await fetch('/lib/js/game.js');
+    res = await res.text();
+    let endpoint = res.match(/requests.get\("(.*?)",/)[1];
+    
     $('.toastMessage').remove();
 
-    blacket.requests.get(`/worker2/user/${prompt('Enter a username...')}`, (data) => {
+    blacket.requests.get(`${endpoint}/${prompt('Enter a username...')}`, (data) => {
         if (data.error) return alert('That user doesn\'t exist.');
 
         let id = Math.random().toString(36).substring(2, 15);
