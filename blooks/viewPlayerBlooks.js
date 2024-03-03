@@ -1,10 +1,14 @@
-(() => {
+(async () => {
+    let res = await fetch('/lib/js/game.js');
+    res = await res.text();
+    let endpoint = res.match(/requests.get\("(.*?)",/)[1];
+    
     if (!location.pathname.startsWith('/blooks')) return alert('You must be on the Blooks page to run this script.');
 
     $('.styles__blooksHolder___3qZR1-camelCase').children().replaceWith();
     $('.styles__rightButtonRow___3a0GF-camelCase').remove();
 
-    blacket.requests.get(`/worker2/user/${prompt('Enter username:')}`, (data) => {
+    blacket.requests.get(`${endpoint}/${prompt('Enter username:')}`, (data) => {
         blacket.user.blooks = data.user.blooks;
         blacket.packBlooks = [];
         Object.keys(blacket.packs).reverse().forEach((pack) => {
